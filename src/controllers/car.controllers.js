@@ -33,11 +33,20 @@ const removeCar = catchError(async (req, res) => {
 });
 
 const updateCar = catchError(async (req, res) => {
+  const { brand, model, year, color, price, category } = req.body;
   const { id } = req.params;
   const car = await Car.update(
-    { model: "Grand Turismo", color: "Red" },
+    {
+      brand,
+      model,
+      year,
+      color,
+      price,
+      category,
+    },
     { where: { id }, returning: true }
   );
+
   return res.json(car[1][0]);
 });
 
